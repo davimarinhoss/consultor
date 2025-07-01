@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CHECKLIST W1</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+      /* Configurações Globais e Variáveis de Cor */
+      :root {
+        --background-color: #eaf1f2;
+        --text-color: #2e474b; /* Tom principal escuro (Azul-petróleo) */
+        --text-color-light: #8ba1a5; /* Tom cinza claro para destaque secundário */
+        --border-color: #000000;
+        --accent-color: #338d99; /* Tom de destaque (Ciano) */
+      }
+
+      /* Garante que a página não tenha margens */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: "Poppins", sans-serif;
+        overflow-x: hidden; /* Evita a barra de rolagem horizontal */
+      }
+
+      /* Contêiner principal ajustado para tela cheia */
+      .slide-container {
+        width: 100vw; /* 100% da largura da tela */
+        min-height: 100vh; /* No mínimo 100% da altura da tela */
+        background-color: var(--background-color);
+        color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        padding: 4vh 6vw;
+        box-sizing: border-box;
+      }
+
+      /* Faixa preta na lateral esquerda */
+      .left-border {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 12px;
+        height: 100%;
+        background-color: var(--border-color);
+      }
+
+      /* Cabeçalho */
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        flex-shrink: 0;
+      }
+
+      .logo img {
+        max-height: 200px;
+      }
+
+      .header-title {
+        font-size: clamp(0.9em, 1.5vw, 1.2em);
+        color: var(--text-color);
+      }
+
+      /* Conteúdo Principal */
+      main {
+        flex-grow: 1;
+        padding-top: 5vh;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+      }
+
+      /* --- ESTRUTURA DE TÍTULO --- */
+      .title-container {
+        margin-bottom: 5vh;
+      }
+
+      .main-title {
+        text-align: left;
+        margin: 0;
+        font-size: clamp(
+          2.2em,
+          5vw,
+          3.5em
+        ); /* <-- O TAMANHO FOI DIMINUÍDO AQUI */
+        font-weight: 700;
+        line-height: 1.1;
+      }
+
+      .sub-headline {
+        text-align: left;
+        margin: 0.5vh 0 0 0;
+        font-size: clamp(1.2em, 2.5vw, 1.8em);
+        font-weight: 500;
+        color: var(--text-color-light);
+      }
+      /* --- FIM DA ESTRUTURA --- */
+
+      .content-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 4vw;
+        width: 100%;
+        flex-grow: 1;
+      }
+
+      .main-content {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 5vh;
+      }
+
+      .checklist-column {
+        width: 100%;
+      }
+
+      /* Estilos da lista de perguntas */
+      .checklist {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .checklist li {
+        margin-bottom: clamp(15px, 2vh, 20px);
+        display: flex;
+        align-items: flex-start;
+        line-height: 1.5;
+        font-size: clamp(1.1em, 2vw, 1.6em);
+        font-weight: 500;
+      }
+
+      .checklist li::before {
+        content: "";
+        flex-shrink: 0;
+        width: 1em;
+        height: 1em;
+        border: 3px solid var(--accent-color);
+        background-color: #fff;
+        border-radius: 4px;
+        margin-right: 18px;
+        margin-top: 0.25em;
+        display: inline-block;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .cta-button {
+        background-color: var(--text-color);
+        color: #ffffff;
+        text-align: center;
+        padding: 16px 32px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: clamp(1.1em, 1.8vw, 1.4em);
+        text-decoration: none;
+        display: inline-block;
+        box-shadow: 0 6px 18px rgba(46, 71, 75, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 22px rgba(46, 71, 75, 0.25);
+      }
+
+      /* Coluna da Imagem */
+      .icon-column {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 1.5s ease-out;
+      }
+
+      .target-icon {
+        width: clamp(300px, 35vw, 480px); /* Aumentei o tamanho novamente */
+        height: auto;
+        border-radius: 15px; /* Bordas arredondadas */
+        box-shadow: 0 8px 24px rgba(46, 71, 75, 0.15); /* Sombra sutil */
+        border: 1px solid #dde6e7; /* Borda fina */
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      /* Media Query para telas menores */
+      @media (max-width: 900px) {
+        .icon-column {
+          display: none;
+        }
+        .main-content {
+          flex: 1;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .slide-container {
+          padding: 5vh 8vw;
+        }
+        .left-border {
+          width: 8px;
+        }
+        .main-title {
+          font-size: clamp(2.5em, 10vw, 3em);
+        }
+        .sub-headline {
+          font-size: clamp(1.1em, 5vw, 1.3em);
+        }
+        .checklist li {
+          font-size: clamp(1em, 4vw, 1.2em);
+        }
+        .cta-button {
+          width: 100%;
+          box-sizing: border-box;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="slide-container">
+      <div class="left-border"></div>
+      <header>
+        <div class="logo">
+          <img
+            src="https://i.postimg.cc/1t8QJD4x/logo-w1-1-1.png"
+            alt="Logo W1"
+          />
+        </div>
+        <div class="header-title">Diagnóstico Patrimonial</div>
+      </header>
+      <main>
+        <div class="title-container">
+          <h1 class="main-title">Seu legado PRECISA de uma holding agora?</h1>
+        </div>
+
+        <div class="content-wrapper">
+          <div class="main-content">
+            <div class="checklist-column">
+              <ul class="checklist">
+                <li>Seu patrimônio atual supera R$ 1 milhão?</li>
+                <li>Seu patrimônio está crescendo rapidamente?</li>
+                <li>Alguém depende da renda ou do uso desses bens?</li>
+                <li>
+                  Você possui imóveis ou participações em empresas (Lucro
+                  Presumido ou Real)?
+                </li>
+                <li>
+                  Você já tem um plano de sucessão definido para seus bens?
+                </li>
+                <li>
+                  Existe algum risco de processo ou dívida que possa afetar seu
+                  patrimônio?
+                </li>
+              </ul>
+            </div>
+            <div class="cta-button">
+              → Marque as opções que se aplicam e agende seu diagnóstico
+              inicial.
+            </div>
+          </div>
+          <div class="icon-column">
+            <img
+              src="https://i.postimg.cc/sXF1MbS8/Chat-GPT-Image-27-de-jun-de-2025-17-25-32.png"
+              alt="Ícone de Holding"
+              class="target-icon"
+            />
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
